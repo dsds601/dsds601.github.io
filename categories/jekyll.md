@@ -1,7 +1,7 @@
 ---
 layout: page
-title: Jekyll
-permalink: /blog/categories/jekyll/
+title: 프로그래밍 기초
+permalink: /blog/categories/프로그래밍 기초/
 ---
 
 <h5> Posts by Category : {{ page.title }} </h5>
