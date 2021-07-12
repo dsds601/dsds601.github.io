@@ -1,4 +1,4 @@
-# Servlet
+# Model1 Model2
 
 * #### model 1 방식과 model2 방식의 차이
 
