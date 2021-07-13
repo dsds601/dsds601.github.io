@@ -2,9 +2,6 @@
 
 * ### 의존성 주입(Dependency Injection)
 
-* 
-
-* 
 
 * ### 주입이란?
 
@@ -124,10 +121,9 @@
 
   * type ="int" 자료형을 따로 지정하여야 원하는 자료형에 들어간다 String을 최우선 하니 따로 안적어도 무방하다.
     
-
   * 여러개 생성자를 입력하는 경우
   * contructor arg를 여러번 자료형에 맞게 기입한다. String은 클래스명 모두 작성
-
+  
   ```xml
   <constructor-arg value="200" type="int"/>
   	<constructor-arg value="22.22" type="double"/>
@@ -189,7 +185,7 @@
 
 * xml 에 정의되어있는 객체를 주입할 경우
 
-```
+```xml
 	<!-- 정의 되어있는 bean-->
 	<bean id ="data_bean" class="kr.co.beans.DataBean" scope="prototype"/>
 	
@@ -201,3 +197,77 @@
 	
 ```
 
+
+
+
+
+* ### Setter 메서드를 통한 주입
+
+  * Bean을 정의할 때 Bean 객체가 가지고 있을 기본 값을 생성자가 아닌 Setter 메서드를 통해 주입할 수 있다.
+
+
+
+| name  | 데이터를 주입할 프로퍼티의 이름                 |
+| ----- | ----------------------------------------------- |
+| value | 기본 자료형 및 문자열을 주입할 때 사용하는 속성 |
+| ref   | 객체의 주소 값을 주입할 때 사용하는 속성        |
+
+![](https://github.com/dsds601/java/blob/main/img/set%20%EC%A3%BC%EC%9E%85%EC%9B%90%EB%A6%AC.png?raw=true)
+
+* property 태그를 이용하여 name="data1"를 작성하면  앞에set을 붙여 setdata1를 찾아 호출하고
+  value값을 data1에 넣는다.
+
+* class 파일에 get / set 메서드를 지정한다. 
+
+```
+private int data1;
+
+	public int getData1() {
+		return data1;
+	}
+
+	public void setData1(int data1) {
+		this.data1 = data1;
+	}
+
+}
+```
+
+
+
+* Xml.
+
+```
+<bean id='t1' class='kr.co.beans.TestBean'>
+	<property name="data1" value="100"/>
+	</bean> 
+```
+
+* java
+
+```
+ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("kr/co/config/beans.xml");
+		TestBean t1 = ctx.getBean("t1",TestBean.class);
+		System.out.println(t1.getData1());
+```
+
+
+
+* 객체와 정의 되어있는 객체를 주입할때 xml
+
+```
+<bean id='t1' class='kr.co.beans.TestBean'>
+	<property name="data1" value="100"/>
+	<property name="data2" value="11.11"/>
+	<property name="data3" value="true"/>
+	<property name="data4" value="안녕"/>
+	<property name="data5">
+		<bean class="kr.co.beans.DataBean"/>
+	</property>
+	<property name="data6" ref="data_bean"/>
+	</bean> 
+	
+	<bean id ="data_bean" class="kr.co.beans.DataBean"/>  <!-- data6 입니다. -->
+```
+
+* xml에 정의 되어있는 객체를 주입할때는 ref 를 이용하여 주입한다.
