@@ -1,3 +1,8 @@
+# 아래 처럼 config 바꿔야 locald에서 실행됩니다.
+```
+theme: jekyll-theme-hydejack
+# remote_theme: hydecorp/hydejack@v9
+```
 # Hydejack Starter Kit
 
 A quicker, cleaner way to get started blogging with [Hydejack](https://hydejack.com/).
